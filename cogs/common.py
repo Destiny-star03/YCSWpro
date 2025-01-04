@@ -14,6 +14,18 @@ class slash(commands.Cog):
     async def upload(self, ctx: commands.Context):
         await ctx.send("테스트!")
 
+    @commands.command("따라해")
+    async def upload(self, ctx: commands.Context):
+        try:
+            msg = (ctx.message.content).split(" ")
+        except Exception as E:
+            print(E)
+        await ctx.send(msg[1])
+
+    @commands.command("이채널")
+    async def upload(self, ctx: commands.Context):
+        await ctx.send(ctx.message.channel)
+
 # Cog 등록
 async def setup(bot):
     await bot.add_cog(slash(bot))
