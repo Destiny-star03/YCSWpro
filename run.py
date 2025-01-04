@@ -6,7 +6,7 @@ from lib import tools
 COGS_FOLDER = os.path.join(os.path.dirname(__file__), "cogs")  #__file__ < 현재 파이썬 파일
 bot = commands.Bot(command_prefix="!", intents=discord.Intents.all(), sync_command=True)
 bot.voice_connections = []
-Admin = []
+Admin = [381666451431358475, 412863872127729687]
 with open('token.json', 'r', encoding="UTF-8") as file: 
     token = json.load(file)['token']
     if token == "실제 토큰":
@@ -14,7 +14,7 @@ with open('token.json', 'r', encoding="UTF-8") as file:
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.CustomActivity(name=f"온라인"))
+    await bot.change_presence(activity=discord.CustomActivity(name=f"!help로 도움말"))
     # 한번만 동기화 (안되면 빼샘) by fisher
     if not hasattr(bot, 'synced'):
         await bot.tree.sync()
