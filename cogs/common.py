@@ -22,6 +22,7 @@ class slash(commands.Cog):
     async def upload(self, ctx: commands.Context):
         await ctx.send("테스트!")
 
+<<<<<<< HEAD
     @app_commands.command(name="공지사항", description="학교 홈페이지에 있는 공지사항을 확인합니다.")
     async def gongji(self, interaction: discord.Interaction):
 
@@ -45,6 +46,20 @@ class slash(commands.Cog):
             await interaction.response.send_message(E, ephemeral=False)
 
         
+=======
+    @commands.command("따라해")
+    async def upload(self, ctx: commands.Context):
+        try:
+            msg = (ctx.message.content).split(" ")
+        except Exception as E:
+            print(E)
+        await ctx.send(msg[1])
+
+    @commands.command("이채널")
+    async def upload(self, ctx: commands.Context):
+        await ctx.send(ctx.message.channel)
+
+>>>>>>> a5f1d352935b148a48c8786fdfb0ea2a460b7c6f
 # Cog 등록
 async def setup(bot):
     await bot.add_cog(slash(bot))
