@@ -10,15 +10,13 @@ def clener(text):
     return result
 
 for a in test_elements:
-    if 'td_datetime' in a.get('class', []):
-        print(clener(a.text))
-    if 'td_subject' in a.get('class', []):
-        print(clener(a.text))
+    if 'td_datetime' in a.get('class', []) or 'td_subject' in a.get('class', []):
+        print(a.text)
 
 
 
 
-for a, b in test_elements:
+for a in test_elements:
     # if 'td_datetime' in a.get('class', []):
     #     print(clener(a.text))
     # if 'td_subject' in b.get('class', []):

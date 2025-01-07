@@ -22,44 +22,29 @@ class slash(commands.Cog):
     async def upload(self, ctx: commands.Context):
         await ctx.send("테스트!")
 
-<<<<<<< HEAD
     @app_commands.command(name="공지사항", description="학교 홈페이지에 있는 공지사항을 확인합니다.")
     async def gongji(self, interaction: discord.Interaction):
 
         try:
-            embed = Embed(title=f"공지사항", description=f"교내 공지사항")
-
             ycpage = requests.get("http://www.yc.ac.kr/yonam/web/cop/bbs/selectBoardList.do?bbsId=BBSMSTR_000000000590")
             soup = BeautifulSoup(ycpage.text, 'html.parser')
             test_elements = soup.find_all('td')#, class_='td_subject')
 
+            message = ""
+
             for a in test_elements:
                 if 'td_subject' in a.get('class', []):
-                    title = clener(a.text)
-                if 'td_datetime' in a.get('class', []):
-                    date = clener(a.text)
-                embed.add_field(name=title, value=date, inline=False)
+                    message += f"## [{clener(a.text)}](http://www.yc.ac.kr/yonam/web/cop/bbs/selectBoardArticle.do?bbsId=BBSMSTR_000000000590&nttId=77326&searchBBS=&mblDn=&pageIndex=1&searchCnd=0&searchWrd=&adminSearchYn=N)\n"
+                elif 'td_datetime' in a.get('class', []):
+                    message += f"-# {clener(a.text)}\n\n"
+            await interaction.response.send_message(message, ephemeral=False)
 
-            await interaction.response.send_message(embed=embed, ephemeral=False)
         except Exception as E:
             print(E)
             await interaction.response.send_message(E, ephemeral=False)
 
         
-=======
-    @commands.command("따라해")
-    async def upload(self, ctx: commands.Context):
-        try:
-            msg = (ctx.message.content).split(" ")
-        except Exception as E:
-            print(E)
-        await ctx.send(msg[1])
 
-    @commands.command("이채널")
-    async def upload(self, ctx: commands.Context):
-        await ctx.send(ctx.message.channel)
-
->>>>>>> a5f1d352935b148a48c8786fdfb0ea2a460b7c6f
 # Cog 등록
 async def setup(bot):
     await bot.add_cog(slash(bot))
